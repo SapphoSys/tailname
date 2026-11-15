@@ -13,19 +13,22 @@ export const getTailcontrolCookie = async (): Promise<{
 };
 
 export const fetchTailscaleOffers = async (cookieValue: string) => {
-	return await fetch('https://login.tailscale.com/admin/api/tcd/offers', {
-		headers: {
-			accept: 'application/json, text/plain, */*',
-			'accept-language': 'en-US,en;q=0.9',
-			'cache-control': 'no-cache',
-			pragma: 'no-cache',
-			cookie: `tailcontrol=${cookieValue}; tailwww-ui=true`,
+	return await fetch(
+		'https://login.tailscale.com/admin/api/public/admin/tcd/offers',
+		{
+			headers: {
+				accept: 'application/json, text/plain, */*',
+				'accept-language': 'en-US,en;q=0.9',
+				'cache-control': 'no-cache',
+				pragma: 'no-cache',
+				cookie: `tailcontrol=${cookieValue}; tailwww-ui=true`,
+			},
+			referrer: 'https://login.tailscale.com/admin/dns',
+			referrerPolicy: 'strict-origin-when-cross-origin',
+			method: 'GET',
+			mode: 'cors',
 		},
-		referrer: 'https://login.tailscale.com/admin/dns',
-		referrerPolicy: 'strict-origin-when-cross-origin',
-		method: 'GET',
-		mode: 'cors',
-	});
+	);
 };
 
 const handleCheckOffersError = (errMsg: string) => {
