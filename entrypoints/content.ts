@@ -4,7 +4,7 @@ export default defineContentScript({
 		browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 			if (message.action === 'claimToken') {
 				const { tcd, token } = message;
-				fetch('https://login.tailscale.com/admin/api/tcd', {
+				fetch('https://login.tailscale.com/admin/api/public/admin/tcd', {
 					credentials: 'include',
 					headers: {
 						Accept: 'application/json, text/plain, */*',
